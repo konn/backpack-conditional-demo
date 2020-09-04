@@ -1,0 +1,102 @@
+cabal-version: 2.0
+
+-- This file has been generated from package.yaml by hpack version 0.33.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: cb2175f727ac5311785b5e6d93b57aedfc3ae3b2e75c076a978c626c9a7260f4
+
+name:           backpack-single
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/githubuser/backpack-single#readme>
+homepage:       https://github.com/githubuser/backpack-single#readme
+bug-reports:    https://github.com/githubuser/backpack-single/issues
+author:         Author name here
+maintainer:     example@example.com
+copyright:      2020 Author name here
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/githubuser/backpack-single
+
+flag build-A
+  description: Build A
+  manual: True
+  default: False
+
+flag build-B
+  description: Build B
+  manual: True
+  default: False
+
+library backpack-single-core
+  exposed-modules:
+    CoreTypes
+  hs-source-dirs:
+    src-core
+  build-depends: 
+      base >=4.7 && <5  
+  default-language: Haskell2010
+
+library backpack-single-sigs
+  signatures:
+      ModA, ModB
+  exposed-modules:
+      Lib
+  hs-source-dirs:
+      src-sigs
+  build-depends:
+      base >=4.7 && <5
+    , backpack-single-core
+  default-language: Haskell2010
+
+library backpack-single-impls
+  if flag(build-A)
+    exposed-modules: ModA.Impl
+    reexported-modules: ModA.Impl as ModA
+  else
+    exposed-modules: ModA.Dummy
+    reexported-modules: ModA.Dummy as ModA
+  if flag(build-B)
+    exposed-modules: ModB.Impl
+    reexported-modules: ModB.Impl as ModB
+  else
+    exposed-modules: ModB.Dummy
+    reexported-modules: ModB.Dummy as ModB
+  hs-source-dirs:
+      src-impls
+  build-depends:
+      base >=4.7 && <5
+    , backpack-single-core
+  default-language: Haskell2010
+
+library
+  reexported-modules: CoreTypes, Lib, ModA, ModB
+  mixins: backpack-single-core, backpack-single-sigs
+  other-modules:
+      Paths_backpack_single
+  hs-source-dirs:
+      src-sigs
+  build-depends:
+      base >=4.7 && <5
+    , backpack-single-core
+    , backpack-single-impls
+    , backpack-single-sigs
+  default-language: Haskell2010
+
+executable backpack-single-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_backpack_single
+  hs-source-dirs:
+      app
+  build-depends:
+      backpack-single
+    , base >=4.7 && <5
+  default-language: Haskell2010

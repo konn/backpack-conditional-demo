@@ -13,11 +13,19 @@ Uses `reexported-modules` section of Cabal to achieve conditional building.
 
 ## separate-backpacks
 
-## Pros
+### Pros
 * Can statically check module signatures
-* Works with Cabal >= 2.0
 * Underlying packages can refer to the switched modules.
 
-## Cons
+### Cons
 * Won't work with Stack
 * Too many separate packages!
+
+## backpack-single
+### Pros
+* Same as the separate one
+* Only one user-facing library package!
+  
+### Cons
+* Haddock doesn't support reexported-modules 
+* Stack won't work
