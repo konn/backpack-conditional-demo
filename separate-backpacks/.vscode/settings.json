@@ -1,0 +1,5 @@
+{
+  "editor.defaultFormatter": "haskell.haskell",
+  "editor.formatOnSave": true,
+  "haskell.formattingProvider": "stylish-haskell"
+}

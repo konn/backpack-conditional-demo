@@ -1,0 +1,12 @@
+cradle:
+  cabal:
+    - path: "./separate-impl/src"
+      component: "lib:separate-impl"
+    - path: "./separate-impl/app/Main.hs"
+      component: "separate-impl:separate-impl-exe"
+
+    - path: "./separate-sigs/src"
+      component: "lib:separate-sigs"
+
+    - path: "./separate-core/src"
+      component: "lib:separate-core"

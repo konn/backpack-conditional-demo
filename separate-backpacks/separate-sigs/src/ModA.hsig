@@ -1,0 +1,9 @@
+{-# LANGUAGE DataKinds, KindSignatures #-}
+signature ModA where
+import CoreTypes
+import Data.Kind
+
+data TypeA :: [Type]
+instance Typeable' TypeA
+
+appA :: IO ()

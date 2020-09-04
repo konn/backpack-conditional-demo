@@ -1,0 +1,9 @@
+{-# LANGUAGE DataKinds, KindSignatures #-}
+signature ModB where
+import CoreTypes
+import GHC.TypeNats
+
+data TypeB :: Tree Nat
+instance Typeable' TypeB
+
+appB :: IO ()
