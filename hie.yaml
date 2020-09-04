@@ -1,0 +1,12 @@
+cradle:
+  cabal:
+    - path: "src"
+      component: "lib:backpack-conditional-demo:core-lib"
+    - path: "sigs"
+      component: "lib:backpack-conditional-demo:core-sigs"
+    - path: "src-dummies"
+      component: "lib:backpack-conditional-demo:conditionals"
+    - path: "."
+      component: "lib:backpack-conditional-demo"
+    - path: "app/Main.hs"
+      component: "backpack-conditional-demo:exe:backpack-conditional-demo-exe"

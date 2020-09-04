@@ -1,0 +1,84 @@
+cabal-version:      2.0
+name:               backpack-conditional-demo
+version:            0.1.0.0
+license:            BSD3
+license-file:       LICENSE
+copyright:          2020 Author name here
+maintainer:         example@example.com
+author:             Author name here
+homepage:
+    https://github.com/konn/backpack-conditional-demo#readme
+
+bug-reports:
+    https://github.com/konn/backpack-conditional-demo/issues
+
+description:
+    Please see the README on GitHub at <https://github.com/githubuser/backpack-conditional-demo#readme>
+
+build-type:         Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+flag enable-a
+  Description: Enables ModA
+  Default: False
+  Manual:  True
+
+flag enable-b
+  Description: Enables ModB
+  Default: False
+  Manual:  True
+
+source-repository head
+    type:     git
+    location: https://github.com/githubuser/backpack-conditional-demo
+
+
+library
+  hs-source-dirs:    src
+  default-language: Haskell2010
+  build-depends:    base, template-haskell
+  exposed-modules: Lib
+  other-modules:
+
+  if flag(enable-a)
+    exposed-modules:
+      ModA.Enabled
+    reexported-modules:
+      ModA.Enabled as ModA
+  else 
+    exposed-modules:
+      ModA.Dummy
+    reexported-modules:
+      ModA.Dummy as ModA
+  if flag(enable-b)
+    exposed-modules:
+      ModB.Enabled
+    reexported-modules:
+      ModB.Enabled as ModB
+  else 
+    exposed-modules:
+      ModB.Dummy
+    reexported-modules:
+      ModB.Dummy as ModB
+
+executable backpack-conditional-demo-exe
+    main-is:          Main.hs
+    hs-source-dirs:   app
+    other-modules:    Paths_backpack_conditional_demo
+    default-language: Haskell2010
+    build-depends:
+        backpack-conditional-demo -any,
+        base >=4.7 && <5
+
+-- test-suite backpack-conditional-demo-test
+--     type:             exitcode-stdio-1.0
+--     main-is:          Spec.hs
+--     hs-source-dirs:   test
+--     other-modules:    Paths_backpack_conditional_demo
+--     default-language: Haskell2010
+--     ghc-options:      -threaded -rtsopts -with-rtsopts=-N
+--     build-depends:
+--         backpack-conditional-demo -any,
+--         base >=4.7 && <5

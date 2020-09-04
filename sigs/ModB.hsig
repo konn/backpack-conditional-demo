@@ -1,0 +1,10 @@
+{-# LANGUAGE DataKinds, KindSignatures #-}
+signature ModB (TypesB, theFunB) where
+import Data.Kind
+import Lib
+import Type.Reflection
+
+data TypesB :: [Type]
+instance TypeableC TypesB
+
+theFunB :: IO ()
